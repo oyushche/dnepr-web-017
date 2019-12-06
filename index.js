@@ -22,17 +22,37 @@ app.use("/api/users", usersRouter);
 app.engine('pug', require('pug').__express);
 app.set("views", path.join(__dirname, "public"));
 
+let users = [
+    
+    {
+        "id" : "0",
+        "name" : "Oleg",
+        "age": "23"
+    },
+    {
+        "id" : "1",
+        "name" : "Irina",
+        "age": "48"
+    },
+    {
+        "id" : "2",
+        "name" : "Alex",
+        "age": "89"
+    }
+];
+
 let logger = function(req, resp, next)
 {
     if (req.session.visits == undefined)
     {
         req.session.visits = 0;
+        req.session.users = users;
     }
 
     req.session.visits += 1;
     console.log("visit: " + req.session.visits
-        + " processing: " + req.path
-        + ", session: " + JSON.stringify(req.session));
+        + " processing: " + req.path);
+        // + ", session: " + JSON.stringify(req.session));
     next();
 };
 
@@ -41,6 +61,12 @@ app.use(logger);
 app.get("/", (req, resp) =>
 {
     resp.render("index.pug");
+});
+
+app.get("/users", (req, resp) =>
+{
+    console.log(req.session);
+    resp.render("users.pug", { users: req.session.users});
 });
 
 app.all("*", (req, resp) =>

@@ -2,32 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-let users = [
-    
-    {
-        "id" : "0",
-        "name" : "Oleg",
-        "age": "23"
-    },
-    {
-        "id" : "1",
-        "name" : "Irina",
-        "age": "48"
-    },
-    {
-        "id" : "2",
-        "name" : "Alex",
-        "age": "89"
-    }
-];
+
 
 router.get("/", (req, resp) =>
 {
-    if (req.session.users == undefined)
-    {
-        req.session.users = users;
-    }
-    
     resp.json(req.session.users);
 });
 
