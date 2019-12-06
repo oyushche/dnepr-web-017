@@ -1,0 +1,8 @@
+
+extends ../index.pug
+
+block content
+
+    h3 User List
+    for u in users
+        div=`${u.name} ${u.age}`

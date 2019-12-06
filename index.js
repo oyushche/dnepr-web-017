@@ -20,7 +20,7 @@ app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 app.use("/api/users", usersRouter);
 
 app.engine('pug', require('pug').__express);
-app.set("views", path.join(__dirname, "public"));
+app.set("views", path.join(__dirname, "public/templates"));
 
 let users = [
     
@@ -66,7 +66,7 @@ app.get("/", (req, resp) =>
 app.get("/users", (req, resp) =>
 {
     // console.log(req.session);
-    resp.render("users.pug", { users: req.session.users});
+    resp.render("users/users.pug", { users: req.session.users});
 });
 
 app.all("*", (req, resp) =>
