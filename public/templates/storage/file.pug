@@ -1,0 +1,22 @@
+
+extends ../index.pug
+
+block links
+    span
+        a(href="/") Home
+    span
+        a(href="api/storage/save") Save
+    span
+        a(href="api/storage/load") Load
+
+block content
+
+    if saved
+        h1 Content saved
+
+    if loaded
+        h1 Content loaded
+
+    if !saved && !loaded
+        div
+        img(src="notes.jpeg")

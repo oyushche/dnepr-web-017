@@ -5,6 +5,7 @@ const path = require('path');
 const session = require('express-session');
 
 const usersRouter = require('./users.js');
+const fileRouter = require('./file.js');
 
 const PORT = 8000;
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 
 app.use("/api/users", usersRouter);
+app.use("/", fileRouter);
 
 app.engine('pug', require('pug').__express);
 app.set("views", path.join(__dirname, "public/templates"));
