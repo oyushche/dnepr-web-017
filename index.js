@@ -65,7 +65,7 @@ app.get("/", (req, resp) =>
 
 app.get("/users", (req, resp) =>
 {
-    console.log(req.session);
+    // console.log(req.session);
     resp.render("users.pug", { users: req.session.users});
 });
 
