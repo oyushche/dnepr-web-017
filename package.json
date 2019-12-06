@@ -9,15 +9,21 @@
   },
   "author": "oyu",
   "license": "ISC",
-  "devDependencies": {
+  "devDependencies":
+  {
     "nodemon": "^2.0.0"
   },
-  "dependencies": {
+
+  "dependencies":
+  {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "express-session": "^1.17.0"
+    "express-session": "^1.17.0",
+    "pug": "^2.0.4"
   },
-  "resolve": {
+
+  "resolve":
+  {
     "express": "4.17.1"
   }
 }

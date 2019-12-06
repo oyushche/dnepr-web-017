@@ -23,7 +23,6 @@ let users = [
 
 router.get("/", (req, resp) =>
 {
-    console.log(req.session);
     if (req.session.users == undefined)
     {
         req.session.users = users;
