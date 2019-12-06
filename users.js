@@ -23,7 +23,13 @@ let users = [
 
 router.get("/", (req, resp) =>
 {
-    resp.json(users);
+    console.log(req.session);
+    if (req.session.users == undefined)
+    {
+        req.session.users = users;
+    }
+    
+    resp.json(req.session.users);
 });
 
 router.get("/:id", (req, resp, next) =>
@@ -37,8 +43,16 @@ router.get("/:id", (req, resp, next) =>
         return;
     }
     
-    resp.json(users[id]);
+    resp.json(req.session.users[id]);
 });
+
+router.delete("/:id", (req, resp) =>
+{
+    console.log("DELETE ...");
+    req.session.users.splice(req.params.id, 1);
+    resp.status(200).send("OK");
+});
+
 
 module.exports = router;
 
@@ -54,9 +68,3 @@ module.exports = router;
 //     resp.send("OK");
 // });
 //
-// router.delete("/:id", (req, resp) =>
-// {
-//     console.log("DELETE ...");
-//     users.splice(req.params.id, 1);
-//     resp.status(200).send("OK");
-// });

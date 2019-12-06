@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
 
 const usersRouter = require('./users.js');
 
@@ -11,15 +12,16 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api/users", usersRouter);
-
 app.use(bodyParser.urlencoded( { extended: false } ));
 app.use(bodyParser.json());
 
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+app.use("/api/users", usersRouter);
 
 let logger = function(req, resp, next)
 {
-    console.log("processing: " + req.path);
+    console.log("processing: " + req.path + ", session: " + req.session);
     next();
 };
 
